@@ -1,26 +1,17 @@
 import os
 import unittest
 import time
+import appium
+import desired_capabilities_android
 
 
 from appium import webdriver
 
 
-PATH = lambda p: os.path.abspath(
-    os.path.join(os.path.dirname(__file__), p)
-)
-
-
 class AndroidLogin(unittest.TestCase):
     def setUp(self):
 
-        desired_caps = {
-        'platformName': 'Android',
-        'platformVersion': '7.0',
-        'deviceName': 'Android Emulator',
-        'app': PATH('android-debug.apk'),
-        'newCommandTimeout': 240
-    }
+        desired_caps = desired_capabilities_android.get_desired_capabilities()
         self.driver = webdriver.Remote('http://localhost:4723/wd/hub', desired_caps)
 
     def tearDown(self):
