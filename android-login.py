@@ -28,7 +28,7 @@ PATH = lambda p: os.path.abspath(
 
 class AndroidLogin(unittest.TestCase):
     def setUp(self):
-#        desired_caps = desired_capabilities.get_desired_capabilities('android-debug.apk')
+
         desired_caps = {
         'platformName': 'Android',
         'platformVersion': '7.0',
@@ -37,35 +37,22 @@ class AndroidLogin(unittest.TestCase):
         'newCommandTimeout': 240
     }
         self.driver = webdriver.Remote('http://localhost:4723/wd/hub', desired_caps)
-#        abs_path =  os.path.abspath('../../apps/android-debug.apk')
-#        self.driver = webdriver.Remote(
-#            command_executor='http://127.0.0.1:4723/wd/hub',
-#            desired_capabilities={
-##              'app': os.path.abspath(abs_path),
- ###             'platformName': 'Android',
-###              'deviceName': 'Android Emulator',
-#              'autoWebview': 'true',
-#              'automationName': 'selendroid'
-#        })
 
     def tearDown(self):
         self.driver.quit()
 
-    def test_find_single_element(self):
+    def test_customer_login(self):
         
-        self.driver.implicitly_wait(10)
-        webview = self.driver.contexts[0]
 
-        print(self.driver.contexts)
-        print(self.driver.contexts[0])
-        print(self.driver.contexts[1])
+#        print(self.driver.contexts)
+#        print(self.driver.contexts[0])
+#        print(self.driver.contexts[1])
+
         self.driver.switch_to.context('WEBVIEW_com.tidy.clientmobile')
-#        webview = self.driver.contexts.last
-#        self.driver._switch_to.context(webview)
-        self.driver.implicitly_wait(10)
-        elements = self.driver.find_element_by_css_selector("body > ion-app > ng-component > ion-split-pane > ion-nav > page-introduction > ion-content > div.scroll-content > button > span")
-        elements.click()
-        print(elements)
+
+        LoginButton = self.driver.find_element_by_css_selector("body > ion-app > ng-component > ion-split-pane > ion-nav > page-introduction > ion-content > div.scroll-content > button > span")
+        LoginButton.click()
+#        print(LoginButton)
 
         emailField = self.driver.find_element_by_css_selector("body > ion-app > ng-component > ion-split-pane > ion-nav > page-login > ion-content > div.scroll-content > div > form > ion-item:nth-child(1) > div.item-inner > div > ion-input > input")
         emailField.send_keys("helivelton@test1000.com")
